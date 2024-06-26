@@ -1,1 +1,2 @@
-data/*.csv
+data/titanic_basic.csv
+data/titanic_reduced.csv

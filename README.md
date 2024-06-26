@@ -1,6 +1,6 @@
 # Titanic: Machine Learning from Disaster
 
-This repository contains my prediction solution for the Kaggle Titanic competition.
+This repository contains my prediction solution for the Kaggle Titanic competition. I used the Snowflake Cortex ML Classification model to tackle this challenge, both to learn and to evaluate its efficiency.
 
 ## Table of Contents
 
@@ -25,8 +25,9 @@ To run the code in this repository, you need to ensure the following prerequisit
 
 - Create a Kaggle account.
 - Install the Kaggle API and configure Kaggle API credentials. Instructions are available [here](https://github.com/Kaggle/kaggle-api/blob/main/docs/).
+- Ensure you have an active account on the Snowflake platform. If you don't have one yet, sign up for a Snowflake account on their website.
 
-### Download the data
+### Download the Data
 
 Once you have the Kaggle API and credentials configured, you can download the competition data by running:
 
@@ -42,15 +43,36 @@ rm titanic.zip
 
 ## Running the Prediction
 
-Work in progress..
+## To run the prediction, follow the steps:
+
+1. Create a new Snowflake Database (in my case it's called KAGGLE).
+2. Load the train and test data sets into the tables (in my case they are named `titanic_train` and `titanic_test`).
+   - You can do this through the Snowflake Web UI by uploading files through the web browser or by loading them from an S3 bucket. You can use the [these SQL queries](load-data-example.sql) for loading the data that were generated when I was loading the data. Make sure to replace the filename.
+   - The data schemes of the tables with train and test data should [look like this](schemas.sql).
+3. Run one of the sequences of the queries:
+   - [Classification Prediction with no any fine-tuning or feature engineering](cortex-ml-classification-basic.sql)
+   - [Classification Prediction based on a reduced number of features](cortex-ml-classification-reduced-features.sql)
+4. Save results to a .csv file that only contains two cloumns: 
+    - PassengerId
+    - Survived
 
 ## Submit Prediction
 
-Work in progress..
+You can submit your score through the Kaggle Web UI or with the Kaggle CLI tool. The following command can be used to do it:
+
+```
+kaggle competitions submit -c titanic -f {file} -m "{message}"
+```
 
 ## Score
 
-Work in progress..
+The basic prediction with no fine-tuning scored **0.77990**, meaning it successfully predicted whether ~78% of people survived or not. Reducing the features didn't help improve the score (it scored 0.76555), indicating that these features were not noise but were useful despite appearing redundant.
+
+The basic prediction finished in 3404th place out of 17,200 at the time of submitting the results, which is in the **80th percentile**. This is quite good for an off-the-shelf model provided by Snowflake Cortex ML functions.
+
+![Score](images/score.png)
+
+I'll keep working on it and see if I can improve the score with some feature engineering, or alternative approach.
 
 ## Acknowledgements
 
