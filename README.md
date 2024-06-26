@@ -43,7 +43,7 @@ rm titanic.zip
 
 ## Running the Prediction
 
-## To run the prediction, follow the steps:
+To run the prediction, follow the steps:
 
 1. Create a new Snowflake Database (in my case it's called KAGGLE).
 2. Load the train and test data sets into the tables (in my case they are named `titanic_train` and `titanic_test`).
@@ -68,7 +68,7 @@ kaggle competitions submit -c titanic -f {file} -m "{message}"
 
 The basic prediction with no fine-tuning scored **0.77990**, meaning it successfully predicted whether ~78% of people survived or not. Reducing the features didn't help improve the score (it scored 0.76555), indicating that these features were not noise but were useful despite appearing redundant.
 
-The basic prediction finished in 3404th place out of 17,200 at the time of submitting the results, which is in the **80th percentile**. This is quite good for an off-the-shelf model provided by Snowflake Cortex ML functions.
+The basic prediction finished in 3404th place out of 17,200 at the time of submitting the results, which is in the **80th percentile**. 
 
 ![Score](images/score.png)
 
