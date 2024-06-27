@@ -50,8 +50,9 @@ To run the prediction, follow the steps:
    - You can do this through the Snowflake Web UI by uploading files through the web browser or by loading them from an S3 bucket. You can use the [these SQL queries](load-data-example.sql) for loading the data that were generated when I was loading the data. Make sure to replace the filename.
    - The data schemes of the tables with train and test data should [look like this](schemas.sql).
 3. Run one of the sequences of the queries:
-   - [Classification Prediction with no any fine-tuning or feature engineering](cortex-ml-classification-basic.sql)
-   - [Classification Prediction based on a reduced number of features](cortex-ml-classification-reduced-features.sql)
+   - A: [Classification Prediction with no any fine-tuning or feature engineering](cortex-ml-classification-basic.sql)
+   - B: [Classification Prediction based on a reduced number of features](cortex-ml-classification-reduced-features.sql)
+   - C: [Classification Prediction based on some additional/advanced feature engineering](cortex-ml-classification-advanced.sql)
 4. Save results to a .csv file that only contains two cloumns: 
     - PassengerId
     - Survived
@@ -66,9 +67,9 @@ kaggle competitions submit -c titanic -f {file} -m "{message}"
 
 ## Score
 
-The basic prediction with no fine-tuning scored **0.77990**, meaning it successfully predicted whether ~78% of people survived or not. Reducing the features didn't help improve the score (it scored 0.76555), indicating that these features were not noise but were useful despite appearing redundant.
+The advanced prediction with no some features engineering scored **0.78229**, meaning it successfully predicted for ~78.23% of people whether survived or not. 
 
-The basic prediction finished in 3404th place out of 17,200 at the time of submitting the results, which is in the **80th percentile**. 
+I finished in 2810th place out of 17,290 at the time of submitting the results, which is in the **84th percentile**. 
 
 ![Score](images/score.png)
 
