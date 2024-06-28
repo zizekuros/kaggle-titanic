@@ -15,6 +15,10 @@ SELECT COUNT(*) AS COUNT, SURVIVED FROM TITANIC_TRAIN GROUP BY SURVIVED;
 -- We are going to add this as one of the titles
 SELECT COUNT(SURVIVED) AS COUNT, SURVIVED FROM TITANIC_TRAIN WHERE LOWER(NAME) LIKE '%dr.%' GROUP BY SURVIVED;
 
+-- Let's presume people younger than 15 and older than 60 needs help. First, let's check how many of survived (=50%)
+-- I tried to add this feature but doesn't help much (worse score)
+SELECT COUNT(SURVIVED) AS COUNT, SURVIVED FROM TITANIC_TRAIN WHERE AGE < 15 OR AGE > 60 GROUP BY SURVIVED;
+
 -- Create a Views (titanic_train_advanced, titanic_test_advanced) 
 -- Excluded: CABIN, NAME
 -- Added: AGE for NULL
@@ -44,7 +48,7 @@ SELECT
         WHEN LOWER(NAME) LIKE '%mrs.%' THEN 'mrs' 
         WHEN LOWER(NAME) LIKE '%miss.%' THEN 'miss' 
         ELSE ''
-    END AS title
+    END AS TITLE
 FROM titanic_train;
     
 CREATE OR REPLACE VIEW titanic_test_advanced AS
@@ -70,7 +74,7 @@ SELECT
         WHEN LOWER(NAME) LIKE '%mrs.%' THEN 'mrs' 
         WHEN LOWER(NAME) LIKE '%miss.%' THEN 'miss' 
         ELSE ''
-    END AS title
+    END AS TITLE
 FROM titanic_test;
 
 -- Check train and test data sets with advanced features
