@@ -51,8 +51,7 @@ To run the prediction, follow the steps:
    - The data schemes of the tables with train and test data should [look like this](schemas.sql).
 3. Run one of the sequences of the queries:
    - A: [Classification Prediction with no any fine-tuning or feature engineering](cortex-ml-classification-basic.sql)
-   - B: [Classification Prediction based on a reduced number of features](cortex-ml-classification-reduced-features.sql)
-   - C: [Classification Prediction based on some additional/advanced feature engineering](cortex-ml-classification-advanced.sql)
+   - B: [Classification Prediction based on some custom features and cleaned data](cortex-ml-classification-advanced.sql)
 4. Save results to a .csv file that only contains two cloumns: 
     - PassengerId
     - Survived
