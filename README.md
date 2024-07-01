@@ -50,8 +50,8 @@ To run the prediction, follow the steps:
    - You can do this through the Snowflake Web UI by uploading files through the web browser or by loading them from an S3 bucket. You can use the [these SQL queries](load-data-example.sql) for loading the data that were generated when I was loading the data. Make sure to replace the filename.
    - The data schemes of the tables with train and test data should [look like this](schemas.sql).
 3. Run one of the sequences of the queries:
-   - A: [Classification Prediction with no any fine-tuning or feature engineering](cortex-ml-classification-basic.sql)
-   - B: [Classification Prediction based on some custom features and cleaned data](cortex-ml-classification-advanced.sql)
+   - [Basic Classification Prediction](cortex-ml-classification-basic.sql)
+   - [Classification Prediction based on some custom features and cleaned data](cortex-ml-classification-advanced.sql)
 4. Save results to a .csv file that only contains two cloumns: 
     - PassengerId
     - Survived
@@ -72,7 +72,7 @@ I finished in 2810th place out of 17,290 at the time of submitting the results, 
 
 ![Score](images/score.png)
 
-I'll keep working on it and see if I can improve the score with some feature engineering, or alternative approach.
+Maybe I'll keep working on it and see if I can improve the score with some feature engineering, or alternative approach.
 
 ## Acknowledgements
 
