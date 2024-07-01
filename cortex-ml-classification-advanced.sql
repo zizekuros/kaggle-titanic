@@ -1,5 +1,5 @@
--- Train data set
-SELECT * FROM KAGGLE.PUBLIC.TITANIC_TRAIN;
+-- Check train data set
+SELECT * FROM TITANIC_TRAIN;
 
 -- Let's find out the median age (=28.0)
 -- I also tested different median ages for males and females, but it was worse.
@@ -37,7 +37,7 @@ FROM
 WHERE FARE > 0.0;
     
 -- Create train data set with custom features
-CREATE OR REPLACE VIEW titanic_train_advanced AS
+CREATE OR REPLACE VIEW TITANIC_TRAIN_ADVANCED AS
 SELECT 
     --CABIN, 
     --NAME,
@@ -70,10 +70,10 @@ SELECT
         WHEN LOWER(NAME) LIKE '%miss.%' THEN 'miss'
         ELSE ''
     END AS TITLE
-FROM titanic_train;
+FROM TITANIC_TRAIN;
 
 -- Create test data set with custom features
-CREATE OR REPLACE VIEW titanic_test_advanced AS
+CREATE OR REPLACE VIEW TITANIC_TEST_ADVANCED AS
 SELECT 
     --CABIN,
     --NAME,
@@ -105,25 +105,25 @@ SELECT
         WHEN LOWER(NAME) LIKE '%miss.%' THEN 'miss'
         ELSE ''
     END AS TITLE,
-FROM titanic_test;
+FROM TITANIC_TEST;
 
 -- Check train and test data sets with advanced features
-SELECT * FROM titanic_train_advanced;
-SELECT * FROM titanic_test_advanced;
+SELECT * FROM TITANIC_TRAIN_ADVANCED;
+SELECT * FROM TITANIC_TEST_ADVANCED;
 
 -- Train a model on train data set with custom of features
-CREATE OR REPLACE SNOWFLAKE.ML.CLASSIFICATION my_titanic_model_advanced(
+CREATE OR REPLACE SNOWFLAKE.ML.CLASSIFICATION MY_TITANIC_MODEL_ADVANCED(
 	INPUT_DATA => SYSTEM$REFERENCE('VIEW', 'titanic_train_advanced'),
 	TARGET_COLNAME => 'SURVIVED'
 );
 
 -- Confirm that model exists
-SHOW snowflake.ml.classification;
+SHOW SNOWFLAKE.ML.CLASSIFICATION;
 
 -- Generate predictions
 SELECT
-    titanic_test_advanced.passengerid as PassengerId, 
-    CAST(my_titanic_model_advanced!PREDICT(object_construct(*)):class as INTEGER) as Survived,
+    TITANIC_TEST_ADVANCED.PASSENGERID as PassengerId, 
+    CAST(MY_TITANIC_MODEL_ADVANCED!PREDICT(object_construct(*)):class as INTEGER) as Survived,
 FROM titanic_test_advanced
 ORDER BY PASSENGERID ASC
 
@@ -132,16 +132,16 @@ ORDER BY PASSENGERID ASC
 ---
 
 -- Get evaluation metrics
-CALL my_titanic_model_advanced!SHOW_EVALUATION_METRICS();
-CALL my_titanic_model_advanced!SHOW_GLOBAL_EVALUATION_METRICS();
-CALL my_titanic_model_advanced!SHOW_CONFUSION_MATRIX();
+CALL MY_TITANIC_MODEL_ADVANCED!SHOW_EVALUATION_METRICS();
+CALL MY_TITANIC_MODEL_ADVANCED!SHOW_GLOBAL_EVALUATION_METRICS();
+CALL MY_TITANIC_MODEL_ADVANCED!SHOW_CONFUSION_MATRIX();
 
 -- Get feature importances
-CALL my_titanic_model_advanced!SHOW_FEATURE_IMPORTANCE();
+CALL MY_TITANIC_MODEL_ADVANCED!SHOW_FEATURE_IMPORTANCE();
 
 -- Drop model
-DROP SNOWFLAKE.ML.CLASSIFICATION my_titanic_model_advanced;
+DROP SNOWFLAKE.ML.CLASSIFICATION MY_TITANIC_MODEL_ADVANCED;
 
 -- Drop views
-DROP VIEW titanic_test_advanced;
-DROP VIEW titanic_train_advanced;
+DROP VIEW TITANIC_TEST_ADVANCED;
+DROP VIEW TITANIC_TRAIN_ADVANCED;
