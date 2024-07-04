@@ -1,6 +1,6 @@
 # Titanic: Machine Learning from Disaster
 
-This repository contains my prediction solution for the Kaggle Titanic competition. I used the Snowflake Cortex ML Classification model to tackle this challenge, both to learn and to evaluate its efficiency.
+This repository contains my prediction solution for the Kaggle Titanic competition. I used the Snowflake ML Classification model to tackle this challenge, both to learn and to evaluate its efficiency.
 
 ## Table of Contents
 
@@ -50,8 +50,8 @@ To run the prediction, follow the steps:
    - You can do this through the Snowflake Web UI by uploading files through the web browser or by loading them from an S3 bucket. You can use the [these SQL queries](load-data-example.sql) for loading the data that were generated when I was loading the data. Make sure to replace the filename.
    - The data schemes of the tables with train and test data should [look like this](schemas.sql).
 3. Run one of the sequences of the queries:
-   - [Basic Classification Prediction](cortex-ml-classification-basic.sql)
-   - [Classification Prediction based on some custom features and cleaned data](cortex-ml-classification-advanced.sql)
+   - [Basic Classification Prediction](snowflake-ml-classification-basic.sql)
+   - [Classification Prediction based on some custom features and cleaned data](snowflake-ml-classification-advanced.sql)
 4. Save results to a .csv file that only contains two cloumns: 
     - PassengerId
     - Survived
