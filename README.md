@@ -17,6 +17,8 @@ This repository contains my prediction solution for the Kaggle Titanic competiti
 
 The Titanic competition on Kaggle is a classic machine learning challenge. The goal is to build a predictive model that answers the question: "what sorts of people were more likely to survive?" using passenger data (i.e., name, age, gender, socio-economic class, etc.).
 
+I described the entire solution step-by-step in [this article](https://medium.com/@zizek.uros/how-i-solved-the-kaggles-titanic-ml-challenge-using-snowflake-classification-model-5e249563a79e). 
+
 ## Getting Started
 
 ### Prerequisites
